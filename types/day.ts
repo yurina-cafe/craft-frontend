@@ -9,5 +9,5 @@ export enum Feeling {
 export interface NaturalDay {
   date: string;
   feeling: Feeling;
-  note: string;
+  note: string; // 当天的总结
 }

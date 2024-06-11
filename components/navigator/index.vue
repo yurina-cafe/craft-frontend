@@ -7,41 +7,49 @@
       <div>FeelingCraft</div>
     </div>
     <div class="link-group">
-      <NuxtLink to="/"><Icon name="uil:home-alt" />日常 Daily</NuxtLink>
-      <NuxtLink to="/statistic"
-        ><Icon name="uil:adjust-circle" />统计 Statistic</NuxtLink
-      >
-      <NuxtLink to="/achievement"
-        ><Icon name="uil:award" />成就 Achievement</NuxtLink
-      >
+      <NavigatorItem to="/" icon="uil:home" text="首页 Home"></NavigatorItem>
+      <NavigatorItem
+        to="/statistic"
+        icon="uil:adjust-circle"
+        text="统计 Statistic"
+      ></NavigatorItem>
+      <NavigatorItem
+        to="/achievement"
+        icon="uil:award"
+        text="成就 Achievement"
+      ></NavigatorItem>
+    </div>
+    <div class="concern-list">
+      <Concern></Concern>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.navigator {
-  @apply w-full h-full;
-  background: rgba(37, 31, 26, 0.677);
-}
+  .navigator {
+    @apply w-full h-full;
+    background: rgba(37, 31, 26, 0.677);
 
-.title {
-  @apply flex items-center justify-center text-[24px] h-24 gap-1;
-  color: rgb(222, 221, 220, 0.62);
-  svg {
-    @apply size-[32px] mt-1;
-  }
-}
-.link-group {
-  @apply flex flex-col gap-2 items-start;
-
-  a {
-    @apply flex items-center gap-2 text-[16px];
-    @apply w-full h-4 p-4 m-1;
-    @apply rounded-lg;
+    .concern-list {
+      @apply flex flex-col items-center justify-center gap-4;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
   }
 
-  svg {
-    @apply size-[24px] mt-1;
+  .title {
+    @apply flex items-center justify-center text-[24px] h-24 gap-1;
+    color: rgb(222, 221, 220, 0.62);
+    svg {
+      @apply size-[32px] mt-1;
+    }
   }
-}
+  .link-group {
+    @apply flex flex-col items-start;
+
+    svg {
+      @apply size-[24px] mt-1;
+    }
+  }
 </style>

@@ -17,31 +17,31 @@ const feelingProps = computed<FeelingProps>(() => {
       return {
         row: props.feeling,
         iconifyName: "twemoji:grinning-face",
-        description: "开心 HAPPY",
+        description: "开心",
       };
     case Feeling.SAD:
       return {
         row: props.feeling,
         iconifyName: "twemoji:crying-face",
-        description: "难过 SAD",
+        description: "难过",
       };
     case Feeling.ANGRY:
       return {
         row: props.feeling,
         iconifyName: "twemoji:angry-face",
-        description: "生气 ANGRY",
+        description: "生气",
       };
     case Feeling.STRESSED:
       return {
         row: props.feeling,
         iconifyName: "twemoji:face-with-steam-from-nose",
-        description: "压力大 STRESS",
+        description: "压力大",
       };
     case Feeling.NEUTRAL:
       return {
         row: props.feeling,
         iconifyName: "twemoji:neutral-face",
-        description: "一般 NEUTRAL",
+        description: "一般",
       };
     default:
       return {
@@ -56,10 +56,10 @@ const feelingProps = computed<FeelingProps>(() => {
 <template>
   <div>
     <div class="feeling-card">
-      <div class="feeling-icon">
+      <div class="name">{{ feelingProps.description }}</div>
+      <div class="icon">
         <Icon :name="feelingProps.iconifyName" />
       </div>
-      <div class="feeling-name">{{ feelingProps.description }}</div>
     </div>
   </div>
 </template>
@@ -69,6 +69,10 @@ const feelingProps = computed<FeelingProps>(() => {
   @apply flex items-center gap-2 text-[20px];
 
   color: white;
+
+  .name {
+    @apply font-semibold;
+  }
 
   svg {
     @apply size-[25px] flex justify-center;
