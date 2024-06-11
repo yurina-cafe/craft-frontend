@@ -16,7 +16,7 @@
       class="w-full rounded-lg h-full flex items-center gap-2 pl-4"
       style="transition: all 0.3s"
       :class="{
-        'bg-gray-900': $route.path === $props.to,
+        'bg-[rgb(50,44,40)]': $route.path === $props.to,
         'hover:bg-gray-800': $route.path !== $props.to,
       }"
     >

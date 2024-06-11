@@ -9,6 +9,17 @@
     <div class="link-group">
       <NavigatorItem to="/" icon="uil:home" text="首页 Home"></NavigatorItem>
       <NavigatorItem
+        to="/calendar"
+        icon="uil:calendar-alt"
+        text="日历 Calendar"
+      ></NavigatorItem>
+      <NavigatorItem
+        to="/clock"
+        icon="uil:clock"
+        text="番茄钟 Pomodoro"
+      ></NavigatorItem>
+      <!-- clock -->
+      <!-- <NavigatorItem
         to="/statistic"
         icon="uil:adjust-circle"
         text="统计 Statistic"
@@ -17,7 +28,7 @@
         to="/achievement"
         icon="uil:award"
         text="成就 Achievement"
-      ></NavigatorItem>
+      ></NavigatorItem> -->
     </div>
     <div class="concern-list">
       <Concern></Concern>

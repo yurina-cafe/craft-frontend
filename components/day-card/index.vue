@@ -14,6 +14,7 @@
         type: ActivityType.CHECKLIST,
         start: 2,
         finished: false,
+        name: "吃饭",
       },
       {
         type: ActivityType.NOTE,
@@ -51,7 +52,7 @@
 
 <style lang="scss" scoped>
   .day-card {
-    @apply w-[320px] h-[280px] rounded-xl flex flex-col gap-2 p-4 shadow-xl;
+    @apply rounded-xl flex flex-col gap-2 p-4 shadow-xl;
     background: linear-gradient(145deg, #5b3d3d, #515e76);
 
     .date {
@@ -60,7 +61,7 @@
     }
 
     .feeling {
-      @apply flex justify-between items-center px-2;
+      @apply flex justify-between items-center px-2 gap-2;
     }
 
     .growing {

@@ -16,18 +16,35 @@
 
 <template>
   <div class="auth-page">
-    <div class="auth-card">
-      <h1>FeelingCraft</h1>
-      <div class="title">请输入你的 ID</div>
-      <input
-        class="id-inputer"
-        type="text"
-        maxlength="7"
-        minlength="2"
-        v-model="userName"
-        placeholder="请输入字数为二到七的 ID"
-      />
-      <button class="btn" @click="submit">启动</button>
+    <div
+      class="hero min-h-screen"
+      style="
+        background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);
+      "
+    >
+      <div class="hero-overlay bg-opacity-70"></div>
+      <div class="hero-content text-center text-neutral-content">
+        <div class="text-[rgb(233,233,233)]">
+          <h1
+            class="mb-5 text-3xl items-center flex justify-center gap-2 font-semibold"
+          >
+            <Icon class="size-[36px] mt-1" name="uil:annoyed" />
+            加入 FeelingCraft
+          </h1>
+          <p class="mb-8 w-full text-md">
+            縱使被說壞話、被討厭，也沒什麼好在意的，因為「對方如何看你」，那是對方的課題。
+          </p>
+          <input
+            v-model="userName"
+            type="text"
+            class="input input-sm input-bordered max-w-xs text-center"
+            placeholder="请输入字数为二到七的 ID"
+          />
+          <button class="btn btn-sm btn-primary ml-4" @click="submit">
+            进入
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,35 +52,5 @@
 <style lang="scss" scoped>
   .auth-page {
     @apply w-full h-full items-center flex justify-center;
-  }
-
-  .auth-card {
-    @apply rounded-lg w-[400px] h-[220px] flex items-center flex-col p-4 shadow-lg;
-    @apply gap-3;
-    background: white;
-
-    h1 {
-      @apply text-2xl font-semibold;
-    }
-
-    .title {
-      @apply text-lg text-center;
-    }
-
-    .id-inputer {
-      @apply w-[240px] h-[40px] mt-2 rounded-xl shadow-md;
-      @apply border border-gray-300;
-      text-align: center;
-
-      &::placeholder {
-        text-align: center;
-      }
-    }
-
-    .btn {
-      @apply w-[80px] h-[40px] mt-2 rounded-[15px] shadow-md;
-      @apply bg-blue-900 text-white;
-      @apply flex items-center justify-center font-semibold;
-    }
   }
 </style>

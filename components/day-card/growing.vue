@@ -7,7 +7,7 @@
 
   const activityViewContext = computed(() => {
     if (props.activity.type === "CHECKLIST") {
-      return props.activity.finished;
+      return props.activity.name;
     } else if (props.activity.type === "NOTE") {
       return props.activity.content;
     } else if (props.activity.type === "CLOCK") {

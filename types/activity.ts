@@ -1,3 +1,5 @@
+import type { CraftFormatTime } from "./time";
+
 export enum ActivityType {
   CHECKLIST = "CHECKLIST", // 完成了某些任务
   CLOCK = "CLOCK", // 完成了一次番茄钟
@@ -6,13 +8,14 @@ export enum ActivityType {
 
 export interface IActivity {
   type: ActivityType;
-  start: number;
+  created: CraftFormatTime;
 }
 
 export type Activity = ChecklistActivity | ClockActivity | NoteActivity;
 
 export interface ChecklistActivity extends IActivity {
   type: ActivityType.CHECKLIST;
+  name: string;
   finished: boolean;
 }
 
@@ -27,8 +30,14 @@ export interface NoteActivity extends IActivity {
 }
 
 export interface Clock {
-  start: number;
-  end: number;
-  duration: number;
+  duration: number; // 持续时间 (分钟)
   name: string; // 番茄钟名称
+  created: CraftFormatTime; // 创建时间
+
+  /**
+   * 结果数据
+   */
+  start?: number; // @Nesb01t todo
+  end?: number; // @Nesb01t todo
+  finished?: boolean; // 是否已完成
 }
