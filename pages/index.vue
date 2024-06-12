@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { type NaturalDay } from "@/types/day";
+
   const user = ref();
   onMounted(() => {
     const u = localStorage.getItem("user");
@@ -7,6 +9,13 @@
     } else {
       navigateTo("/auth");
     }
+  });
+
+  const recentDays = ref();
+  onMounted(() => {
+    getRecentDays().then((days) => {
+      recentDays.value = days;
+    });
   });
 </script>
 
@@ -17,7 +26,9 @@
         <Icon name="twemoji:empty-nest" />
         你好啊 {{ user }}，开始记录今天的日常~
       </h1>
-      <div class="card-list"><DayCard></DayCard></div>
+      <div class="card-list">
+        <DayCard v-if="recentDays?.today" :data="recentDays.today"></DayCard>
+      </div>
       <ActivityAdd class="ml-4"></ActivityAdd>
       <ActivityEveryday class="ml-4"></ActivityEveryday>
       <FeelingSet></FeelingSet>
@@ -28,6 +39,12 @@
         <Icon name="twemoji:file-folder" />
         计划一下明天...
       </h1>
+      <div class="card-list">
+        <DayCard
+          v-if="recentDays?.tomorrow"
+          :data="recentDays.tomorrow"
+        ></DayCard>
+      </div>
     </section>
 
     <section class="yesterday">
@@ -36,7 +53,12 @@
         昨天怎么样?
         <span class="subtitle">已存根，暂不可修改</span>
       </h1>
-      <div class="card-list"><DayCard></DayCard></div>
+      <div class="card-list">
+        <DayCard
+          v-if="recentDays?.yesterday"
+          :data="recentDays.yesterday"
+        ></DayCard>
+      </div>
     </section>
   </div>
 </template>
@@ -45,6 +67,9 @@
   .homepage {
     @apply p-8;
 
+    .day-card {
+      @apply min-w-[250px] min-h-[250px];
+    }
     section {
       @apply w-full flex flex-wrap gap-6;
       @apply border-b border-gray-700 pb-16;

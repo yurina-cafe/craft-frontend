@@ -1,37 +1,57 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { Feeling } from "@/types/day";
+  const setFeelingToday = (feeling: Feeling) => {
+    setTodayFeeling(feeling);
+  };
+
+  const feelingViewModel = ref([
+    {
+      feeling: Feeling.HAPPY,
+      icon: "twemoji:grinning-face",
+      title: "开心",
+      description: "今天过得很开心",
+    },
+    {
+      feeling: Feeling.SAD,
+      icon: "twemoji:crying-face",
+      title: "难过",
+      description: "今天过得很难过",
+    },
+    {
+      feeling: Feeling.ANGRY,
+      icon: "twemoji:angry-face",
+      title: "生气",
+      description: "今天过得很生气",
+    },
+    {
+      feeling: Feeling.STRESSED,
+      icon: "twemoji:face-with-steam-from-nose",
+      title: "压力大",
+      description: "今天压力很大",
+    },
+    {
+      feeling: Feeling.NEUTRAL,
+      icon: "twemoji:neutral-face",
+      title: "一般",
+      description: "今天过得很一般",
+    },
+  ]);
+</script>
 
 <template>
   <div class="feeling-set">
     <h1>今天心情怎么样</h1>
     <ul>
-      <li>
+      <li
+        v-for="feeling in feelingViewModel"
+        :key="feeling.title"
+        @click="setFeelingToday(feeling.feeling)"
+      >
         <span>
-          <Icon name="twemoji:grinning-face" />
-          开心
+          <Icon :name="feeling.icon" />
+          <span>{{ feeling.title }}</span>
         </span>
-        <section>今天过得很开心</section>
-      </li>
-
-      <li>
-        <span>
-          <Icon name="twemoji:crying-face" />
-          难过
-        </span>
-        <section>今天过得很难过</section>
-      </li>
-      <li>
-        <span>
-          <Icon name="twemoji:angry-face" />
-          生气
-        </span>
-        <section>今天过得很生气</section>
-      </li>
-      <li>
-        <span>
-          <Icon name="twemoji:face-with-steam-from-nose" />
-          压力大
-        </span>
-        <section>今天压力很大</section>
+        <section>{{ feeling.description }}</section>
       </li>
     </ul>
   </div>

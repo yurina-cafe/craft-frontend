@@ -1,51 +1,26 @@
 <script setup lang="ts">
-  import { Feeling } from "@/types/day";
-  import { ActivityType, type Activity } from "@/types/activity";
+  import { type NaturalDay } from "@/types/day";
 
-  interface DayCardProps {
-    feeling: Feeling;
-    activities: Activity[];
-  }
-
-  const props = ref<DayCardProps>({
-    feeling: Feeling.ANGRY,
-    activities: [
-      {
-        type: ActivityType.CHECKLIST,
-        start: 2,
-        finished: false,
-        name: "吃饭",
-      },
-      {
-        type: ActivityType.NOTE,
-        start: 1,
-        content: "今天天气不错",
-      },
-      {
-        type: ActivityType.CLOCK,
-        start: 123,
-        clock: {
-          name: "打豆豆",
-          start: 123,
-          end: 455,
-          duration: 12,
-        },
-      },
-    ],
-  });
+  const props = defineProps<{
+    data: NaturalDay;
+  }>();
 </script>
 
 <template>
   <div class="day-card">
     <div class="feeling">
       <span class="date">2024-6-10</span>
-      <DayCardFeeling :feeling="props.feeling"></DayCardFeeling>
+      <DayCardFeeling :feeling="data.feeling"></DayCardFeeling>
     </div>
 
     <div class="divider"></div>
 
-    <div class="growing" v-for="act in props.activities">
+    <div class="growing" v-for="act in data.activities">
       <DayCardGrowing :activity="act"></DayCardGrowing>
+    </div>
+    <div class="empty-growing" v-if="!data.activities.length">
+      <Icon name="twemoji:blueberries" />
+      <span>今天还没有记录哦</span>
     </div>
   </div>
 </template>
@@ -66,6 +41,15 @@
 
     .growing {
       @apply flex flex-col justify-center;
+    }
+
+    .empty-growing {
+      @apply flex items-center gap-2 p-1;
+      color: #999;
+
+      svg {
+        @apply mt-[2px] text-[22px];
+      }
     }
 
     .divider {

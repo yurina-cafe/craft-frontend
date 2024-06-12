@@ -19,17 +19,21 @@
   const confirm = () => {
     if (!validate()) return;
 
-    console.log(form.value);
+    addDayActivity(form.value.created, form.value);
     open.value = false;
   };
 
   const validate = () => {
+    if (!form.value.created) {
+      return false;
+    }
+
     if (type.value === ActivityType.CLOCK) {
-      // validate clock
+      // @todo validate clock
     } else if (type.value === ActivityType.NOTE) {
-      // validate note
+      // @todo validate note
     } else if (type.value === ActivityType.CHECKLIST) {
-      // validate checklist
+      // @todo validate checklist
     }
     return true;
   };
@@ -41,7 +45,7 @@
     [ActivityType.CHECKLIST]: "备忘 Check",
   };
 
-  const form = ref({});
+  const form = ref();
 </script>
 
 <template>
