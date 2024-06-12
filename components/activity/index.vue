@@ -1,9 +1,13 @@
 <script setup lang="ts">
+  import { useDayStore } from "~/stores/day";
   import { ActivityType, type Activity } from "~/types/activity";
 
   const props = defineProps<{
+    day: string;
     activity: Activity;
   }>();
+
+  const dayStore = useDayStore();
 
   const hovering = ref(false);
 
@@ -15,6 +19,7 @@
           viewContext: props.activity.name,
           additionInfo: props.activity.finished ? "已完成" : "未完成",
           bgColor: props.activity.finished ? "bg-green-400" : "bg-red-400",
+          finished: props.activity.finished,
         };
       case ActivityType.NOTE:
         return {
@@ -33,6 +38,7 @@
           bgColor: props.activity.clock.finished
             ? "bg-green-400"
             : "bg-red-400",
+          finished: props.activity.clock.finished,
         };
       default:
         return {
@@ -43,6 +49,36 @@
         };
     }
   });
+
+  const deleteActivity = (activity: Activity) => {
+    const naturalDay = dayStore.days.value.find((d) => d.date === props.day);
+    if (!naturalDay) return;
+
+    naturalDay.activities = naturalDay.activities.filter((act: Activity) => {
+      return JSON.stringify(act) !== JSON.stringify(activity);
+    });
+
+    dayStore.updateDayActivities(naturalDay, naturalDay.activities);
+  };
+
+  const toggleFinishStatus = (activity: Activity) => {
+    const naturalDay = dayStore.days.value.find((d) => d.date === props.day);
+    if (!naturalDay) return;
+
+    const targetActivity = naturalDay.activities.find(
+      (act: Activity) => JSON.stringify(act) === JSON.stringify(activity)
+    );
+    if (!targetActivity) return;
+
+    if (targetActivity.type === ActivityType.CLOCK) {
+      targetActivity.clock.finished = !targetActivity.clock.finished;
+    } else if (targetActivity.type === ActivityType.CHECKLIST) {
+      targetActivity.finished = !targetActivity.finished;
+    } else {
+      return;
+    }
+    dayStore.updateDayActivities(naturalDay, naturalDay.activities);
+  };
 </script>
 
 <template>
@@ -54,14 +90,27 @@
     <Icon :class="activityViewModel.bgColor" :name="activityViewModel.icon" />
     <div v-if="hovering" class="opeartion">
       <Icon
-        name="twemoji:cross-mark"
+        name="wpf:full-trash"
         class="bg-gray-100 cursor-pointer"
-        @click="$emit('delete', props.activity)"
+        @click="deleteActivity(activity)"
+      />
+    </div>
+    <div v-if="hovering" class="opeartion">
+      <Icon
+        :name="
+          activityViewModel.finished
+            ? 'twemoji:check-mark-button'
+            : 'twemoji:cross-mark'
+        "
+        class="bg-gray-100 cursor-pointer"
+        @click="toggleFinishStatus(activity)"
       />
     </div>
     <div class="content">
       <p>{{ activityViewModel.viewContext }}</p>
-      <p class="additional-info">{{ activityViewModel.additionInfo }}</p>
+      <p v-if="!hovering" class="additional-info">
+        {{ activityViewModel.additionInfo }}
+      </p>
     </div>
   </div>
 </template>

@@ -30,7 +30,7 @@ export const useDayStore = () => {
       day = day.date;
     }
 
-    const res = await useHttp(`/day/${day}/activites`, "POST", { activities });
+    const res = await useHttp(`/day/${day}/activities`, "POST", { activities });
     _forceSyncDataFromSvr();
     return res.data;
   };
@@ -63,6 +63,7 @@ export const useDayStore = () => {
   };
 
   return {
+    _forceSyncDataFromSvr,
     fetchRecentDays,
     updateTodayFeeling,
     updateDayActivities,

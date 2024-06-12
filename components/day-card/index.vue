@@ -16,7 +16,7 @@
     <div class="divider"></div>
 
     <div class="growing" v-for="act in data.activities">
-      <Activity :activity="act"></Activity>
+      <Activity :day="data.date" :activity="act"></Activity>
     </div>
     <div class="empty-growing" v-if="!data.activities.length">
       <DayCardEmpty class="w-full h-full"></DayCardEmpty>

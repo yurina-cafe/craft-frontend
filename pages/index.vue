@@ -14,7 +14,7 @@
   const dayStore = useDayStore();
   const recentDays = computed(() => dayStore.recentDays.value);
   const refreshDays = async () => {
-    dayStore.fetchRecentDays();
+    dayStore._forceSyncDataFromSvr();
   };
 
   onMounted(refreshDays);
