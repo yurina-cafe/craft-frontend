@@ -16,7 +16,7 @@
     <div class="divider"></div>
 
     <div class="growing" v-for="act in data.activities">
-      <DayCardActivity :activity="act"></DayCardActivity>
+      <Activity :activity="act"></Activity>
     </div>
     <div class="empty-growing" v-if="!data.activities.length">
       <DayCardEmpty class="w-full h-full"></DayCardEmpty>
@@ -47,7 +47,7 @@
 
     .empty-growing {
       @apply flex items-center gap-2 font-light p-1 flex-1;
-      color: #a7a7a7;
+      color: #838383;
     }
 
     .divider {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { type NaturalDay } from "@/types/day";
+  import { useDayStore } from "~/stores/day";
 
   const user = ref();
   onMounted(() => {
@@ -11,15 +11,13 @@
     }
   });
 
-  const recentDays = ref();
-  const fetchRecentDays = async () => {
-    const days = await getRecentDays();
-    recentDays.value = days;
-  };
+  const dayStore = useDayStore();
+  const recentDays = computed(() => dayStore.recentDays.value);
   const refreshDays = async () => {
-    await fetchRecentDays();
+    dayStore.fetchRecentDays();
   };
-  onMounted(fetchRecentDays);
+
+  onMounted(refreshDays);
 </script>
 
 <template>

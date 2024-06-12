@@ -14,6 +14,12 @@ export interface NaturalDay {
   activities: Activity[];
 }
 
+export interface RecentDay {
+  yesterday: NaturalDay;
+  today: NaturalDay;
+  tomorrow: NaturalDay;
+}
+
 export enum Feeling {
   HAPPY = "HAPPY",
   SAD = "SAD",

@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ActivityType } from "~/types/activity";
   import { type CraftFormatTime } from "@/types/time";
+  import { useDayStore } from "~/stores/day";
 
   const open = defineModel();
   const props = defineProps<{
@@ -11,6 +12,8 @@
   const emits = defineEmits<{
     (e: "add", v: object): void;
   }>();
+
+  const { addDayActivity } = useDayStore();
 
   const modalStatus = computed(() => {
     return open.value ? "modal-open" : "modal-close";

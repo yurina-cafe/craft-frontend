@@ -52,6 +52,13 @@
     @mouseleave="hovering = false"
   >
     <Icon :class="activityViewModel.bgColor" :name="activityViewModel.icon" />
+    <div v-if="hovering" class="opeartion">
+      <Icon
+        name="twemoji:cross-mark"
+        class="bg-gray-100 cursor-pointer"
+        @click="$emit('delete', props.activity)"
+      />
+    </div>
     <div class="content">
       <p>{{ activityViewModel.viewContext }}</p>
       <p class="additional-info">{{ activityViewModel.additionInfo }}</p>
@@ -62,7 +69,7 @@
 <style lang="scss" scoped>
   .growing-card {
     @apply flex items-start gap-2 text-[15px];
-    @apply cursor-pointer select-none;
+    @apply select-none;
 
     svg {
       @apply size-[27px] flex justify-center p-[6px] shadow-sm rounded-full;
@@ -77,7 +84,7 @@
 
     transition: all 0.2s;
     &:hover {
-      transform: scale(1.05) translateX(5px);
+      transform: scale(1.03);
     }
 
     &:active {
