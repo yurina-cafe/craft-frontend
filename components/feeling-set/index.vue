@@ -65,6 +65,8 @@
 
 <style lang="scss" scoped>
   .feeling-set {
+    @apply select-none;
+
     h1 {
       @apply text-2xl font-semibold;
     }
@@ -79,6 +81,10 @@
 
         &:hover {
           transform: scale(1.07);
+        }
+
+        &:active {
+          transform: scale(1);
         }
 
         span {

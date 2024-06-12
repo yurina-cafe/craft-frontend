@@ -19,8 +19,7 @@
       <DayCardActivity :activity="act"></DayCardActivity>
     </div>
     <div class="empty-growing" v-if="!data.activities.length">
-      <Icon name="twemoji:blueberries" />
-      <span>今天还没有记录哦</span>
+      <DayCardEmpty class="w-full h-full"></DayCardEmpty>
     </div>
   </div>
 </template>
@@ -28,11 +27,13 @@
 <style lang="scss" scoped>
   .day-card {
     @apply rounded-xl flex flex-col gap-2 p-4 shadow-xl;
-    background: linear-gradient(100deg, #7d6e46, #6d6d68);
+
+    background: linear-gradient(100deg, #eae7de, #d2d2c9);
+    color: #333;
 
     .date {
       @apply text-[17px];
-      color: #eee;
+      color: #333;
     }
 
     .feeling {
@@ -40,27 +41,18 @@
     }
 
     .growing {
-      @apply flex flex-col justify-center;
+      @apply flex flex-col justify-center h-[30px];
+      color: #444;
     }
 
     .empty-growing {
-      @apply flex items-center gap-2 p-1;
-      color: #999;
-
-      svg {
-        @apply mt-[2px] text-[22px];
-      }
+      @apply flex items-center gap-2 font-light p-1 flex-1;
+      color: #a7a7a7;
     }
 
     .divider {
-      @apply h-[1px] w-full my-1;
-      background: #ffffff18;
-    }
-
-    @apply cursor-pointer;
-    transition: all 0.3s;
-    &:hover {
-      transform: scale(1.01);
+      @apply h-[1px] my-2;
+      background: #ffffffbe;
     }
   }
 </style>
