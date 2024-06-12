@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "cross-env NODE_ENV=dev nuxt dev",
+    "testing": "cross-env NODE_ENV=testing nuxt testing",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -17,6 +18,7 @@
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "daisyui": "^4.12.2",
     "nuxt-icon": "^0.6.10",
     "sass": "^1.77.4"
