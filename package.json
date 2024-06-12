@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "cross-env NODE_ENV=dev nuxt dev",
-    "testing": "cross-env NODE_ENV=testing nuxt dev --host",
+    "dev": "cross-env NODE_ENV=dev nuxt dev --dotenv .env.dev",
+    "testing": "cross-env NODE_ENV=testing nuxt dev --host --dotenv .env.testing",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
