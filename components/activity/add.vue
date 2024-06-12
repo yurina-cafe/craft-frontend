@@ -1,6 +1,10 @@
 <script setup lang="ts">
   import { ActivityType, type Activity } from "@/types/activity";
 
+  const emits = defineEmits<{
+    (e: "add", v: object): void;
+  }>();
+
   const dayText = computed(() => {
     return "今天";
   });
@@ -19,6 +23,7 @@
     :key="initializeType"
     :init-type="initializeType"
     :appointment-time="getFormatTimeString(Date.now())"
+    @add="(v) => emits('add', v)"
   ></DialogActivity>
   <div class="activity-add">
     <h1>给{{ dayText }}添加活动</h1>

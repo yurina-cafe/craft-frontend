@@ -1,7 +1,13 @@
 <script setup lang="ts">
   import { Feeling } from "@/types/day";
-  const setFeelingToday = (feeling: Feeling) => {
-    setTodayFeeling(feeling);
+
+  const emits = defineEmits<{
+    (e: "update"): void;
+  }>();
+
+  const setFeelingToday = async (feeling: Feeling) => {
+    await setTodayFeeling(feeling);
+    emits("update");
   };
 
   const feelingViewModel = ref([

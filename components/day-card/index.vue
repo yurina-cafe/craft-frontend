@@ -9,14 +9,14 @@
 <template>
   <div class="day-card">
     <div class="feeling">
-      <span class="date">2024-6-10</span>
+      <span class="date">{{ data.date }}</span>
       <DayCardFeeling :feeling="data.feeling"></DayCardFeeling>
     </div>
 
     <div class="divider"></div>
 
     <div class="growing" v-for="act in data.activities">
-      <DayCardGrowing :activity="act"></DayCardGrowing>
+      <DayCardActivity :activity="act"></DayCardActivity>
     </div>
     <div class="empty-growing" v-if="!data.activities.length">
       <Icon name="twemoji:blueberries" />
@@ -28,7 +28,7 @@
 <style lang="scss" scoped>
   .day-card {
     @apply rounded-xl flex flex-col gap-2 p-4 shadow-xl;
-    background: linear-gradient(145deg, #5b3d3d, #515e76);
+    background: linear-gradient(100deg, #7d6e46, #6d6d68);
 
     .date {
       @apply text-[17px];
@@ -60,7 +60,7 @@
     @apply cursor-pointer;
     transition: all 0.3s;
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.01);
     }
   }
 </style>

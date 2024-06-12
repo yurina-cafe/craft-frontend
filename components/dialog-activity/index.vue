@@ -8,6 +8,10 @@
     appointmentTime: CraftFormatTime;
   }>();
 
+  const emits = defineEmits<{
+    (e: "add", v: object): void;
+  }>();
+
   const modalStatus = computed(() => {
     return open.value ? "modal-open" : "modal-close";
   });
@@ -16,10 +20,11 @@
     open.value = false;
   };
 
-  const confirm = () => {
+  const confirm = async () => {
     if (!validate()) return;
 
-    addDayActivity(form.value.created, form.value);
+    await addDayActivity(form.value.created, form.value);
+    emits("add", form.value);
     open.value = false;
   };
 

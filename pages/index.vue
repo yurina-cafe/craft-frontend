@@ -12,11 +12,14 @@
   });
 
   const recentDays = ref();
-  onMounted(() => {
-    getRecentDays().then((days) => {
-      recentDays.value = days;
-    });
-  });
+  const fetchRecentDays = async () => {
+    const days = await getRecentDays();
+    recentDays.value = days;
+  };
+  const refreshDays = async () => {
+    await fetchRecentDays();
+  };
+  onMounted(fetchRecentDays);
 </script>
 
 <template>
@@ -29,9 +32,9 @@
       <div class="card-list">
         <DayCard v-if="recentDays?.today" :data="recentDays.today"></DayCard>
       </div>
-      <ActivityAdd class="ml-4"></ActivityAdd>
+      <ActivityAdd @add="refreshDays" class="ml-4"></ActivityAdd>
       <ActivityEveryday class="ml-4"></ActivityEveryday>
-      <FeelingSet></FeelingSet>
+      <FeelingSet @update="refreshDays"></FeelingSet>
     </section>
 
     <section class="tomorrow">
