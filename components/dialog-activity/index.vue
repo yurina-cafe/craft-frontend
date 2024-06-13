@@ -100,8 +100,6 @@
         </form>
         <button class="btn btn-primary" @click="confirm">确认</button>
       </div>
-
-      <div class="mt-4">{{ form }}</div>
     </div>
   </dialog>
 </template>

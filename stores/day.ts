@@ -4,6 +4,7 @@ import type { Feeling, NaturalDay, RecentDay } from "~/types/day";
 export const useDayStore = () => {
   const days = useState<NaturalDay[]>("days", () => []);
   const recentDays = useState<RecentDay>("recentDays");
+  const today = useState<NaturalDay>("today");
 
   const _forceSyncDataFromSvr = () => {
     fetchAllDays();
@@ -19,6 +20,7 @@ export const useDayStore = () => {
   const fetchRecentDays = async () => {
     const res = await useHttp("/day/recent", "GET");
     recentDays.value = res.data;
+    today.value = res.data.today;
     return recentDays.value;
   };
 
@@ -70,5 +72,6 @@ export const useDayStore = () => {
     addDayActivity,
     recentDays,
     days,
+    today,
   };
 };

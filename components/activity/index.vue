@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useDayStore } from "~/stores/day";
-  import { ActivityType, type Activity } from "~/types/activity";
+  import { ActivityType, type Activity, type Clock } from "~/types/activity";
 
   const props = defineProps<{
     day: string;
@@ -11,6 +11,9 @@
 
   const hovering = ref(false);
 
+  const toPoromodo = (clock: Clock) => {
+    navigateTo(`/clock/${clock.name}`);
+  };
   const activityViewModel = computed(() => {
     switch (props.activity.type) {
       case ActivityType.CHECKLIST:
@@ -95,7 +98,10 @@
         @click="deleteActivity(activity)"
       />
     </div>
-    <div v-if="hovering" class="opeartion">
+    <div
+      v-if="hovering && activity.type == ActivityType.CHECKLIST"
+      class="opeartion"
+    >
       <Icon
         :name="
           activityViewModel.finished
@@ -104,6 +110,16 @@
         "
         class="bg-gray-100 cursor-pointer"
         @click="toggleFinishStatus(activity)"
+      />
+    </div>
+    <div
+      v-if="hovering && activity.type == ActivityType.CLOCK"
+      class="opeartion"
+    >
+      <Icon
+        name="twemoji:tomato"
+        class="bg-gray-100 cursor-pointer"
+        @click="toPoromodo(activity.clock)"
       />
     </div>
     <div class="content">

@@ -76,6 +76,7 @@
       <input
         type="checkbox"
         :checked="formValue.finished"
+        v-model="formValue.finished"
         class="ml-1 checkbox"
       />
     </div>

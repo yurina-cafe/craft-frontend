@@ -6,9 +6,14 @@
     (e: "update"): void;
   }>();
 
+  const dayStore = useDayStore();
   const { updateTodayFeeling } = useDayStore();
 
   const checkedFeeling = ref<Feeling | null>(null);
+  onMounted(async () => {
+    await dayStore.fetchRecentDays();
+    checkedFeeling.value = dayStore.today.value.feeling;
+  });
 
   const setFeelingToday = async (feeling: Feeling) => {
     try {
