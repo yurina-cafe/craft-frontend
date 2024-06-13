@@ -113,7 +113,11 @@
       />
     </div>
     <div
-      v-if="hovering && activity.type == ActivityType.CLOCK"
+      v-if="
+        hovering &&
+        activity.type == ActivityType.CLOCK &&
+        !activity.clock.finished
+      "
       class="opeartion"
     >
       <Icon

@@ -5,7 +5,7 @@ export const usePoromodoStore = () => {
   const currentPoromodo = useState("current-poromodo");
 
   const _forceUpdatePodomodoStates = async () => {
-    fetchAllPodomodos();
+    await fetchAllPodomodos();
     currentPoromodo.value = localStorage.getItem("currentPoromodo");
   };
 
@@ -33,12 +33,47 @@ export const usePoromodoStore = () => {
     return res.data;
   };
 
+  const getCurrentPoromodoStartTime = () => {
+    return localStorage.getItem("currentPoromodoStartTime");
+  };
+
+  const getCurrentPoromodoEndTime = async () => {
+    const start = localStorage.getItem("currentPoromodoStartTime");
+    if (!start) {
+      return null;
+    }
+
+    const durationMin = await fetchCurrentPoromodoDuration();
+    if (!durationMin) {
+      return null;
+    }
+
+    return parseInt(start) + durationMin * 60 * 1000;
+  };
+
+  const fetchCurrentPoromodoDuration = async () => {
+    if (!allPoromodos.value) {
+      await _forceUpdatePodomodoStates();
+    }
+    const pomodoro = allPoromodos.value.find(
+      (p) => p.name === currentPoromodo.value
+    );
+    if (!pomodoro) {
+      return null;
+    }
+
+    return pomodoro.duration;
+  };
+
   return {
     _forceUpdatePodomodoStates,
     allPoromodos,
     currentPoromodo,
     fetchAllPodomodos,
+    fetchCurrentPoromodoDuration,
     startPoromodo,
     completeCurrentPoromodo,
+    getCurrentPoromodoStartTime,
+    getCurrentPoromodoEndTime,
   };
 };
