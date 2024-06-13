@@ -37,3 +37,25 @@ export const getFormatTimeString = (time: number): CraftFormatTime => {
   const date = new Date(time);
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 };
+
+// 获取基于时间戳的倒计时
+export const timeStampToCountdown = (
+  ts: number
+): {
+  hour?: number;
+  minute?: number;
+  second?: number;
+} | null => {
+  if (ts <= 0) {
+    return null;
+  }
+  const totalSeconds = Math.floor(ts / 1000);
+  const hour = Math.floor(totalSeconds / 3600);
+  const minute = Math.floor((totalSeconds % 3600) / 60);
+  const second = totalSeconds % 60;
+  return {
+    hour,
+    minute,
+    second,
+  };
+};
