@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import { useDayStore } from "~/stores/day";
   import { ActivityType, type Activity, type Clock } from "~/types/activity";
+  import type { CraftFormatTime } from "~/types/time";
 
   const props = defineProps<{
-    day: string;
+    day: CraftFormatTime;
     activity: Activity;
+    hideAdditionInfo?: boolean;
   }>();
 
   const dayStore = useDayStore();
@@ -128,7 +130,7 @@
     </div>
     <div class="content">
       <p>{{ activityViewModel.viewContext }}</p>
-      <p v-if="!hovering" class="additional-info">
+      <p v-if="!hovering && !hideAdditionInfo" class="additional-info">
         {{ activityViewModel.additionInfo }}
       </p>
     </div>
