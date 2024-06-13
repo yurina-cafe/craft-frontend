@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  onMounted(() => {
+    const u = localStorage.getItem("user");
+    if (!u) {
+      navigateTo("/auth");
+    }
+  });
+</script>
 
 <template>
   <NuxtLayout>
