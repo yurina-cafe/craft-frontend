@@ -5,17 +5,13 @@
 </script>
 
 <template>
-  <div class="calendar">
-    <div class="day" v-for="day in days" :key="day.date">
-      {{ day }}
-    </div>
+  <div class="calendar-page">
+    <Calendar></Calendar>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  .calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1rem;
+  .calendar-page {
+    @apply p-8 w-full h-full;
   }
 </style>
