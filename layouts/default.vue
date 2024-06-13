@@ -18,10 +18,10 @@
     color: rgb(222, 221, 220);
   }
   .left-side-nav {
-    @apply w-[280px] h-[100vh] fixed top-0 left-0;
+    @apply h-[100vh] sticky top-0 left-0;
   }
   .layout-body {
-    @apply w-full h-full ml-[280px];
+    @apply w-full h-full;
     padding: 12px;
   }
 </style>

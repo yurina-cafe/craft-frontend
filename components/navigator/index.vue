@@ -4,7 +4,7 @@
   <div class="navigator">
     <div class="title">
       <Icon name="uil:annoyed" />
-      <div>FeelingCraft</div>
+      <h1>FeelingCraft</h1>
     </div>
     <div class="link-group">
       <NavigatorItem to="/" icon="uil:home" text="首页 Home"></NavigatorItem>
@@ -38,7 +38,7 @@
 
 <style lang="scss" scoped>
   .navigator {
-    @apply w-full h-full;
+    @apply w-[270px] h-full;
     background: rgba(37, 31, 26, 0.677);
 
     .concern-list {
@@ -61,6 +61,22 @@
 
     svg {
       @apply size-[24px] mt-1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navigator {
+      @apply w-[55px];
+    }
+
+    .title {
+      h1 {
+        display: none;
+      }
+    }
+
+    .concern-list > * {
+      display: none;
     }
   }
 </style>
